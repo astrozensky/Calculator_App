@@ -67,6 +67,10 @@ $("button.operator").click(function(){
 
         operator = this.id;
         $(this).addClass("isDepressed");
+    } else if($("button.operator").hasClass("isDepressed")) { // Allows operator to be changed after one is selected
+        $("button.operator").removeClass("isDepressed");
+        $(this).addClass("isDepressed");
+        operator = this.id;
     }
     
 });
