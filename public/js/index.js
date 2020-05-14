@@ -53,11 +53,14 @@ $("#clear").click(function(){
 
 // Operator Function
 $("button.operator").click(function(){
-    firstNum = $("p").text();
-    $("p").text("0");
+    if(!$("button.operator").hasClass("isDepressed")){
+        firstNum = $("p").text();
+        $("p").text("0");
 
-    operator = this.id;
-    $(this).addClass("isDepressed");
+        operator = this.id;
+        $(this).addClass("isDepressed");
+    }
+    
 });
 
 // Equal Function
