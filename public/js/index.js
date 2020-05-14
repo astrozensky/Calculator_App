@@ -1,16 +1,35 @@
-let answer = 0;
-let variables = [];
+let answer = 0,
+    firstNum,
+    secondNum,
+    operator,
+    variables = [];
 
 // Number function
 $("button.number").on("click", function(){
+    let currentVal = $("p").text();
     let val = $(this).text();
-    $("p").append(val);
+    if (currentVal === "0"){
+        $("p").empty();
+        $("p").append(val);
+    } else {
+        $("p").append(val);
+    }
 });
 
 // Clear function
 $("#clear").click(function(){
     $("p").empty();
+    $("p").text("0");
     answer = 0;
+});
+
+// Operator Function
+$("button.operator").click(function(){
+    firstNum = $("p").text();
+    $("p").text("0");
+
+    operator = this.id;
+    $(this).addClass("isDepressed");    
 });
 
 // Add Function
@@ -40,13 +59,23 @@ $("#add").click(function(){
 
 // Equal Function
 $("#equal").click(function(){
-    variables.push(Number($("p").text()));
-    answer = variables.reduce((a, b) => a + b, 0);
-    $("p").empty();
-    $("p").append(answer);
-    variables.length = 0;
+    secondNum = $("p").text();
+    $("p").text(calculate());
 });
 
-function equals() {
+function calculate() {
+    let numOne = parseFloat(firstNum);
+    let numTwo = parseFloat(secondNum);
     
+    if(operator === "add"){
+        answer = numOne + numTwo;
+    } else if(operator === "subtract"){
+        answer = numOne - numTwo;
+    } else if (operator === "multiply"){
+        answer = numOne * numTwo;
+    } else if (operator === "divide"){
+        answer = numOne / numTwo;
+    }
+
+    return answer.toString();
 }
