@@ -8,19 +8,19 @@
         <title>Calculator App</title>
     </head>
     <body>
-        <header>
+        <header class="text-center mt-5">
             <h1>Calculator Application</h1>
         </header>
 
-        <div class="container">
+        <div class="container mt-5">
             <!-- Calculator Display -->
-            <div class="row">
-                <div class="col">
-                    <p>Display Here</p>
+            <div class="row my-2 text-right justify-content-center">
+                <div class="col-11 display">
+                    <p class="m-0">Display Here</p>
                 </div>
             </div>
             <!-- Operator Buttons -->
-            <div class="row">
+            <div class="row mt-2 text-center">
                 <div class="col-3">
                     <button>+</button>
                 </div>
@@ -34,9 +34,10 @@
                     <button>/</button>
                 </div>
             </div>
-            <div class="row">
+            <div class="row text-center">
+                <!-- Numbers -->
                 <div class="col-9">
-                    <div class="row">
+                    <div class="row my-2 text-center">
                         <div class="col-4">
                             <button>7</button>
                         </div>
@@ -47,7 +48,7 @@
                             <button>9</button>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row my-2 text-center">
                         <div class="col-4">
                             <button>4</button>
                         </div>
@@ -58,7 +59,7 @@
                             <button>6</button>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row my-2 text-center">
                         <div class="col-4">
                             <button>1</button>
                         </div>
@@ -69,7 +70,7 @@
                             <button>3</button>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row my-2 text-center">
                         <div class="col-4">
                             <button>0</button>
                         </div>
@@ -81,11 +82,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <!-- Equals Button -->
+                <div class="col-3 my-2">
                     <button>=</button>
                 </div>
             </div>
         </div>
+
+
         <script type="text/javascript" src="/js/index.js"></script>
     </body>
 </html>
