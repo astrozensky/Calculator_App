@@ -14,16 +14,20 @@ $("button.number").on("click", function(){
     if (currentVal === "0"){
         $("p").empty();
 
+        // Check if keypress is decimal
         if($(this).text() !== ".") {
             $("p").append(val);
+        } else if (currentVal === "0"){
+            $("p").text("0.");
         } else if (!checkDecimal()) {
             $("p").append(val);
-        }
+        } 
         
         // Change clear to backspace 
         $("#clear").text("<-");
         $("#clear").addClass("backspace");
     } else {
+        // Check if keypress is decimal
         if($(this).text() !== ".") {
             $("p").append(val);
         } else if (!checkDecimal()) {
@@ -56,6 +60,7 @@ $("#clear").click(function(){
 
 // Operator Function
 $("button.operator").click(function(){
+    // Check if value has been entered and an operator hasn't been selected
     if(!$("button.operator").hasClass("isDepressed") && firstKeypress){
         firstNum = $("p").text();
         $("p").text("0");
