@@ -1,13 +1,15 @@
 let answer = 0,
     firstNum,
     secondNum,
-    operator;
+    operator,
+    firstKeypress = false;
 
 
 // Number function
 $("button.number").on("click", function(){
     let currentVal = $("p").text();
     let val = $(this).text();
+    firstKeypress = true;
 
     if (currentVal === "0"){
         $("p").empty();
@@ -47,13 +49,14 @@ $("#clear").click(function(){
         // Reset stored values
         answer = "",
         firstNum = "",
-        secondNum = "";
+        secondNum = "",
+        firstKeypress = false;
     }
 });
 
 // Operator Function
 $("button.operator").click(function(){
-    if(!$("button.operator").hasClass("isDepressed")){
+    if(!$("button.operator").hasClass("isDepressed") && firstKeypress){
         firstNum = $("p").text();
         $("p").text("0");
 
@@ -65,11 +68,16 @@ $("button.operator").click(function(){
 
 // Equal Function
 $("#equal").click(function(){
-    secondNum = $("p").text();
-    $("p").text(calculate());
+    if(firstKeypress) {
+        secondNum = $("p").text();
+        $("p").text(calculate());
 
-    $("#clear").text("C");
-    $("#clear").removeClass("backspace");
+        $("#clear").text("C");
+        $("#clear").removeClass("backspace");
+
+        firstKeypress = false;
+    }
+    
 });
 
 
