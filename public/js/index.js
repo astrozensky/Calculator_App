@@ -3,6 +3,18 @@ let answer = 0,
     secondNum,
     operator;
 
+// Backspace Function
+// if($("p").text() === "0"){
+//     $("#clear").text("C");
+//     $("#clear").removeClass("backspace");
+// } else {
+//     $("#clear").text("<-");
+//     $("#clear").addClass("backspace");
+// }
+if($("p").text() != "0"){
+    alert("not 0");
+}
+
 // Number function
 $("button.number").on("click", function(){
     let currentVal = $("p").text();
@@ -11,6 +23,9 @@ $("button.number").on("click", function(){
     if (currentVal === "0"){
         $("p").empty();
         $("p").append(val);
+
+        $("#clear").text("<-");
+        $("#clear").addClass("backspace");
     } else {
         $("p").append(val);
     }
@@ -20,15 +35,20 @@ $("button.number").on("click", function(){
     }
 });
 
-// Clear function
+// Clear/Backspace function
 $("#clear").click(function(){
-    $("p").empty();
-    $("p").text("0");
+    if($(this).hasClass("backspace")){
+        let str = $("p").text().slice(0,-1);
+        $("p").text(str);
+    } else {
+        $("p").empty();
+        $("p").text("0");
 
-    // Reset stored values
-    answer = "",
-    firstNum = "",
-    secondNum = "";
+        // Reset stored values
+        answer = "",
+        firstNum = "",
+        secondNum = "";
+    }
 });
 
 // Operator Function
@@ -44,7 +64,12 @@ $("button.operator").click(function(){
 $("#equal").click(function(){
     secondNum = $("p").text();
     $("p").text(calculate());
+
+    $("#clear").text("C");
+    $("#clear").removeClass("backspace");
 });
+
+
 
 function calculate() {
     let numOne = parseFloat(firstNum);
