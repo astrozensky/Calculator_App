@@ -16,22 +16,22 @@
             <!-- Calculator Display -->
             <div class="row my-2 text-right justify-content-center">
                 <div class="col-11 display">
-                    <p class="m-0">Display Here</p>
+                    <p class="m-0" style="height: 25px;"></p>
                 </div>
             </div>
             <!-- Operator Buttons -->
             <div class="row mt-2 text-center">
                 <div class="col-3">
-                    <button>+</button>
+                    <button id="add" class="operator">+</button>
                 </div>
                 <div class="col-3">
-                    <button>-</button>
+                    <button id="subtract" class="operator">-</button>
                 </div>
                 <div class="col-3">
-                    <button>*</button>
+                    <button id="multiply" class="operator">*</button>
                 </div>
                 <div class="col-3">
-                    <button>/</button>
+                    <button id="divide" class="operator">/</button>
                 </div>
             </div>
             <div class="row text-center">
@@ -39,57 +39,59 @@
                 <div class="col-9">
                     <div class="row my-2 text-center">
                         <div class="col-4">
-                            <button>7</button>
+                            <button class="number">7</button>
                         </div>
                         <div class="col-4">
-                            <button>8</button>
+                            <button class="number">8</button>
                         </div>
                         <div class="col-4">
-                            <button>9</button>
-                        </div>
-                    </div>
-                    <div class="row my-2 text-center">
-                        <div class="col-4">
-                            <button>4</button>
-                        </div>
-                        <div class="col-4">
-                            <button>5</button>
-                        </div>
-                        <div class="col-4">
-                            <button>6</button>
+                            <button class="number">9</button>
                         </div>
                     </div>
                     <div class="row my-2 text-center">
                         <div class="col-4">
-                            <button>1</button>
+                            <button class="number">4</button>
                         </div>
                         <div class="col-4">
-                            <button>2</button>
+                            <button class="number">5</button>
                         </div>
                         <div class="col-4">
-                            <button>3</button>
+                            <button class="number">6</button>
                         </div>
                     </div>
                     <div class="row my-2 text-center">
                         <div class="col-4">
-                            <button>0</button>
+                            <button class="number">1</button>
                         </div>
                         <div class="col-4">
-                            <button>.</button>
+                            <button class="number">2</button>
                         </div>
                         <div class="col-4">
-                            <button>C</button>
+                            <button class="number">3</button>
+                        </div>
+                    </div>
+                    <div class="row my-2 text-center">
+                        <div class="col-4">
+                            <button class="number">0</button>
+                        </div>
+                        <div class="col-4">
+                            <button class="number">.</button>
+                        </div>
+                        <div class="col-4">
+                            <button id="clear">C</button>
                         </div>
                     </div>
                 </div>
                 <!-- Equals Button -->
                 <div class="col-3 my-2">
-                    <button>=</button>
+                    <button id="equal">=</button>
                 </div>
             </div>
         </div>
 
-
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+        <!-- Custom js -->
         <script type="text/javascript" src="/js/index.js"></script>
     </body>
 </html>
