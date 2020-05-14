@@ -3,17 +3,6 @@ let answer = 0,
     secondNum,
     operator;
 
-// Backspace Function
-// if($("p").text() === "0"){
-//     $("#clear").text("C");
-//     $("#clear").removeClass("backspace");
-// } else {
-//     $("#clear").text("<-");
-//     $("#clear").addClass("backspace");
-// }
-if($("p").text() != "0"){
-    alert("not 0");
-}
 
 // Number function
 $("button.number").on("click", function(){
@@ -22,14 +11,25 @@ $("button.number").on("click", function(){
 
     if (currentVal === "0"){
         $("p").empty();
-        $("p").append(val);
 
+        if($(this).text() !== ".") {
+            $("p").append(val);
+        } else if (!checkDecimal()) {
+            $("p").append(val);
+        }
+        
+        // Change clear to backspace 
         $("#clear").text("<-");
         $("#clear").addClass("backspace");
     } else {
-        $("p").append(val);
+        if($(this).text() !== ".") {
+            $("p").append(val);
+        } else if (!checkDecimal()) {
+            $("p").append(val);
+        }
     }
 
+    // Remove isDepressed from operator button
     if(firstNum){
         $("button.operator").removeClass("isDepressed");
     }
@@ -57,7 +57,7 @@ $("button.operator").click(function(){
     $("p").text("0");
 
     operator = this.id;
-    $(this).addClass("isDepressed");    
+    $(this).addClass("isDepressed");
 });
 
 // Equal Function
@@ -86,4 +86,16 @@ function calculate() {
     }
 
     return answer.toString();
+}
+
+function checkDecimal() {
+    let str = $("p").text();
+
+    for(let i = 0; i < str.length; i++){
+        if(str[i] === "."){
+            return true;
+        } 
+    }
+
+    return false;
 }
