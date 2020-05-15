@@ -3,7 +3,8 @@ let answer = 0,
     secondNum,
     operator,
     firstKeypress = false,
-    multipleOperator = false;
+    multipleOperator = false
+    equalKey = false;
 
 
 // Number function
@@ -12,19 +13,22 @@ $("button.number").on("click", function(){
     let val = $(this).text();
     firstKeypress = true;
 
-    if (currentVal === "0" || multipleOperator){
+    if (currentVal === "0" || multipleOperator || equalKey){
         $("p").empty();
 
         // Check if keypress is decimal
         if($(this).text() != ".") {
             $("p").append(val);
-            multipleOperator = false;
+            multipleOperator = false,
+            equalKey = false;
         } else if (currentVal === "0"){
             $("p").text("0.");
-            multipleOperator = false;
+            multipleOperator = false,
+            equalKey = false;
         } else if (!checkDecimal()) {
             $("p").append(val);
-            multipleOperator = false;
+            multipleOperator = false,
+            equalKey = false;
         } 
         
         // Change clear to backspace 
@@ -46,22 +50,7 @@ $("button.number").on("click", function(){
 });
 
 // Clear/Backspace function
-$("#clear").click(function(){
-    if($(this).hasClass("backspace") && $("p").text() != "0"){
-        let str = $("p").text().slice(0,-1);
-        $("p").text(str);
-    } else {
-        $("p").empty();
-        $("p").text("0");
-
-        // Reset stored values
-        answer = "",
-        firstNum = "",
-        secondNum = "",
-        firstKeypress = false,
-        multipleOperator = false;
-    }
-});
+$("#clear").click(clear);
 
 // Operator Function
 $("button.operator").click(function(){
@@ -100,8 +89,9 @@ $("#equal").click(function(){
         $("#clear").text("C");
         $("#clear").removeClass("backspace");
 
-        firstKeypress = false,
-        multipleOperator = false;
+        resetValues();
+        
+        equalKey = true;
     }
     
 });
@@ -135,4 +125,25 @@ function checkDecimal() {
     }
 
     return false;
+}
+
+function clear(){
+    if($(this).hasClass("backspace") && $("p").text() != "0"){
+        let str = $("p").text().slice(0,-1);
+        $("p").text(str);
+    } else {
+        $("p").empty();
+        $("p").text("0");
+
+        resetValues();
+    }
+}
+
+function resetValues(){
+    // Reset stored values
+    answer = "",
+    firstNum = "",
+    secondNum = "",
+    firstKeypress = false,
+    multipleOperator = false;
 }
