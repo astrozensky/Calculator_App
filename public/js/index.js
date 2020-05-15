@@ -2,7 +2,8 @@ let answer = 0,
     firstNum,
     secondNum,
     operator,
-    firstKeypress = false;
+    firstKeypress = false,
+    multipleOperator = false;
 
 
 // Number function
@@ -11,16 +12,19 @@ $("button.number").on("click", function(){
     let val = $(this).text();
     firstKeypress = true;
 
-    if (currentVal === "0"){
+    if (currentVal === "0" || multipleOperator){
         $("p").empty();
 
         // Check if keypress is decimal
-        if($(this).text() !== ".") {
+        if($(this).text() != ".") {
             $("p").append(val);
+            multipleOperator = false;
         } else if (currentVal === "0"){
             $("p").text("0.");
+            multipleOperator = false;
         } else if (!checkDecimal()) {
             $("p").append(val);
+            multipleOperator = false;
         } 
         
         // Change clear to backspace 
@@ -28,7 +32,7 @@ $("button.number").on("click", function(){
         $("#clear").addClass("backspace");
     } else {
         // Check if keypress is decimal
-        if($(this).text() !== ".") {
+        if($(this).text() != ".") {
             $("p").append(val);
         } else if (!checkDecimal()) {
             $("p").append(val);
@@ -43,7 +47,7 @@ $("button.number").on("click", function(){
 
 // Clear/Backspace function
 $("#clear").click(function(){
-    if($(this).hasClass("backspace")){
+    if($(this).hasClass("backspace") && $("p").text() != "0"){
         let str = $("p").text().slice(0,-1);
         $("p").text(str);
     } else {
@@ -54,37 +58,50 @@ $("#clear").click(function(){
         answer = "",
         firstNum = "",
         secondNum = "",
-        firstKeypress = false;
+        firstKeypress = false,
+        multipleOperator = false;
     }
 });
 
 // Operator Function
 $("button.operator").click(function(){
+    if($("button.operator").hasClass("isDepressed")) { // Allows operator to be changed after one is selected
+        $("button.operator").removeClass("isDepressed");
+        $(this).addClass("isDepressed");
+        operator = this.id;
+    } else if(firstNum){
+        secondNum = $("p").text();
+        $("p").empty();
+        $("p").text(calculate());
+        $(this).addClass("isDepressed");
+
+        firstNum = $("p").text(),
+        operator = this.id,
+        secondNum = "",
+        answer = 0,
+        multipleOperator = true;
+    }
     // Check if value has been entered and an operator hasn't been selected
-    if(!$("button.operator").hasClass("isDepressed") && firstKeypress){
+    else if(!$("button.operator").hasClass("isDepressed") && firstKeypress){
         firstNum = $("p").text();
         $("p").text("0");
 
         operator = this.id;
         $(this).addClass("isDepressed");
-    } else if($("button.operator").hasClass("isDepressed")) { // Allows operator to be changed after one is selected
-        $("button.operator").removeClass("isDepressed");
-        $(this).addClass("isDepressed");
-        operator = this.id;
-    }
-    
+     } 
 });
 
 // Equal Function
 $("#equal").click(function(){
-    if(firstKeypress) {
+    if(firstKeypress && $("p").text() != "0") {
         secondNum = $("p").text();
         $("p").text(calculate());
 
         $("#clear").text("C");
         $("#clear").removeClass("backspace");
 
-        firstKeypress = false;
+        firstKeypress = false,
+        multipleOperator = false;
     }
     
 });
