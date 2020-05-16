@@ -86,6 +86,12 @@ function operators() {
         secondNum = "",
         answer = 0,
         multipleOperator = true;
+    } else if (equalKey){
+        firstNum = $("p").text();
+        $("p").text("0");
+
+        operator = this.id,
+        multipleOperator = true;
     }
     // Check if value has been entered and an operator hasn't been selected
     else if(!$("button.operator").hasClass("isDepressed") && firstKeypress){
@@ -95,6 +101,10 @@ function operators() {
         operator = this.id;
         $(this).addClass("isDepressed");
      } 
+}
+
+function clearAndStoreVal() {
+    
 }
 
 function numbers() {
