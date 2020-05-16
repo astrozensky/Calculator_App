@@ -20,7 +20,7 @@ function calculate() {
         answer = numOne / numTwo;
     }
 
-    return answer.toString();
+    return answer.toString().substring(0,10);
 }
 
 function checkDecimal() {
@@ -133,7 +133,7 @@ function numbers() {
         // Change clear to backspace 
         $("#clear").text("<-");
         $("#clear").addClass("backspace");
-    } else {
+    } else if (currentVal.length < 10) {
         // Check if keypress is decimal
         if($(this).text() != ".") {
             $("p").append(val);
