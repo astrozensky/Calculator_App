@@ -9,18 +9,10 @@ let answer = 0,
 function calculate() {
     let numOne = parseFloat(firstNum);
     let numTwo = parseFloat(secondNum);
-
-    if(operator === "add"){
-        answer = numOne + numTwo;
-    } else if(operator === "subtract"){
-        answer = numOne - numTwo;
-    } else if (operator === "multiply"){
-        answer = numOne * numTwo;
-    } else if (operator === "divide"){
-        answer = numOne / numTwo;
-    }
-
-    return answer.toString().substring(0,10);
+    if (operator === "add") return (numOne + numTwo).toString().substring(0,10);
+    if (operator === "subtract") return (numOne - numTwo).toString().substring(0,10);
+    if (operator === "multiply") return (numOne * numTwo).toString().substring(0,10);
+    if (operator === "divide") return (numOne / numTwo).toString().substring(0,10);
 }
 
 function checkDecimal() {
@@ -37,11 +29,21 @@ function checkDecimal() {
 
 function clear(){
     if($(this).hasClass("backspace") && $("p").text() != "0"){
-        let str = $("p").text().slice(0,-1);
-        $("p").text(str);
+        if($("p").text().length === 1){
+            $("p").empty();
+            $("p").text("0");
+            $("#clear").text("C");
+            $("#clear").removeClass("backspace");
+
+            resetValues();
+        } else {
+            let str = $("p").text().slice(0,-1);
+            $("p").text(str);
+        }
     } else {
         $("p").empty();
         $("p").text("0");
+        $("button.operator").removeClass("isDepressed");
 
         resetValues();
     }
@@ -71,6 +73,9 @@ function equals(){
 }
 
 function operators() {
+    $("#clear").text("C");
+    $("#clear").removeClass("backspace");
+
     if($("button.operator").hasClass("isDepressed")) { // Allows operator to be changed after one is selected
         $("button.operator").removeClass("isDepressed");
         $(this).addClass("isDepressed");
@@ -89,6 +94,7 @@ function operators() {
     } else if (equalKey){
         firstNum = $("p").text();
         $("p").text("0");
+        $(this).addClass("isDepressed");
 
         operator = this.id,
         multipleOperator = true;
@@ -111,6 +117,9 @@ function numbers() {
     let currentVal = $("p").text();
     let val = $(this).text();
     firstKeypress = true;
+    // Change clear to backspace 
+    $("#clear").text("<-");
+    $("#clear").addClass("backspace");
 
     if (currentVal === "0" || multipleOperator || equalKey){
         $("p").empty();
@@ -130,9 +139,6 @@ function numbers() {
             equalKey = false;
         } 
         
-        // Change clear to backspace 
-        $("#clear").text("<-");
-        $("#clear").addClass("backspace");
     } else if (currentVal.length < 10) {
         // Check if keypress is decimal
         if($(this).text() != ".") {
